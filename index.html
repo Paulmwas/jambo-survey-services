@@ -8,9 +8,10 @@
     <link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon">
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="https://kit.fontawesome.com/ef94ce9da8.js" crossorigin="anonymous"></script>
+    <script src="./index.js" defer></script>
 </head>
 <body>
-    <nav class="flex flex-col md:flex-row justify-between items-center bg-[#cb6410] p-4 md:px-8">
+    <nav class="flex flex-col md:flex-row justify-between items-center shadow-md bg-[#cb6410] p-4 md:px-8 lg:top-0 lg:sticky lg:z-50">
         <a href="#" class="w-full md:w-auto flex justify-center md:justify-start mb-4 md:mb-0">
             <img src="./images/jambo-logo.png" alt="Jambo Survey Logo" class="h-15">
         </a>
@@ -63,12 +64,12 @@
       </div>
       
       <!-- Navigation Arrows -->
-      <button id="prev-slide" class="absolute left-4 top-2/5 transform -translate-y-1/2  rounded-full p-2 text-white transition duration-300">
-        <i class="fa-solid fa-arrow-left"></i>
+      <button id="prev-slide" class="absolute left-4 top-2/5 transform -translate-y-1/2 cursor-pointer rounded-full p-2 text-white transition duration-300">
+        <i class="fa-solid fa-arrow-left text-2xl"></i>
       </button>
       
-      <button id="next-slide" class="absolute right-4 top-2/5 transform -translate-y-1/2  rounded-full p-2 text-white transition duration-300">
-        <i class="fa-solid fa-arrow-right"></i>
+      <button id="next-slide" class="absolute right-4 top-2/5 transform -translate-y-1/2 cursor-pointer  rounded-full p-2 text-white transition duration-300">
+        <i class="fa-solid fa-arrow-right text-2xl"></i>
       </button>
       
       <!-- Slider Indicators -->
@@ -79,6 +80,55 @@
       </div>
     </div>
   </div>
-<script src="./index.js"></script>
+  <div class="min-h-screen py-16 px-4 bg-gray-50">
+    <div class="container mx-auto max-w-6xl">
+      <!-- About Section with Responsive Flex Direction -->
+      <div class="flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-16">
+        <!-- Text Content Column -->
+        <div class="w-full lg:w-1/2 space-y-6">
+          <!-- Title with Lines -->
+          <div class="flex items-center justify-center space-x-4 mb-6">
+            <div class="h-[3px] w-[50px] bg-blue-700"></div>
+            <h2 class="text-2xl md:text-3xl font-bold text-[#cb6410] whitespace-nowrap">About Us</h2>
+            <div class="h-[3px] w-[50px] bg-blue-700"></div>
+          </div>
+          
+          <!-- About Text -->
+          <div class="space-y-4">
+            <p class="text-gray-700 text-base md:text-lg leading-relaxed">
+              Jambo Survey specializes in land surveying services and the application of geospatial technologies across various sectors, including land administration, agriculture, urban planning, digital mapping, environmental management, and real estate management.
+            </p>
+            
+            <!-- Additional text that provides more information -->
+            <p class="text-gray-700 text-base md:text-lg leading-relaxed">
+              With over 15 years of experience and a team of certified professionals, we deliver accurate and reliable surveying solutions tailored to meet the unique needs of each client.
+            </p>
+            
+            <!-- Learn More Link -->
+            <a href="#" class="inline-flex items-center text-blue-700 font-medium hover:text-blue-800 transition-colors mt-4 group">
+              Learn More 
+              <span class="ml-2 transform group-hover:translate-x-1 transition-transform duration-300">
+                <i class="fa-solid fa-arrow-right text-sm"></i>
+              </span>
+            </a>
+          </div>
+        </div>
+        
+        <!-- Image Column -->
+        <div class="w-full lg:w-1/2 mt-8 lg:mt-0">
+          <div class="relative overflow-hidden rounded-lg shadow-xl">
+            <!-- Placeholder - replace with your actual image -->
+            <img 
+              class="w-full h-auto object-cover" 
+              src="./images/about.jpeg" 
+              alt="Jambo Survey team performing land survey"
+            >
+            <!-- Image overlay with slight blue tint -->
+            <div class="absolute inset-0 bg-blue-900 opacity-10"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </body>
 </html>
