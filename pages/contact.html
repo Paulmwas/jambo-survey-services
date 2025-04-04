@@ -24,13 +24,13 @@
             <ul class="flex flex-col md:flex-row items-center gap-4 md:gap-6 text-lg text-white">
                 <li><a href="../index.html" class="flex items-center hover:text-gray-200 py-2"></i>Home</a></li>
                 <li><a href="./about.html" class="flex items-center hover:text-gray-200 py-2">About Us</a></li>
-                <li><a href="" class="flex items-center hover:text-gray-200 py-2">Services</a></li>
+                <li><a href="./service.html" class="flex items-center hover:text-gray-200 py-2">Services</a></li>
                 <li><a href="./contact.html" class="flex items-center hover:text-gray-200 py-2">Our Contacts</a></li>
             </ul>
         </div>
         <span
             class="w-full md:w-auto bg-[#421606] p-3 text-white rounded-3xl hover:bg-[#5a1e08] transition duration-300 mt-4 md:mt-0 text-center">
-            <a href="#" class="flex items-center justify-center">Request a Quote</a>
+            <a href="./contact.html" class="flex items-center justify-center">Request a Quote</a>
         </span>
         </nav>
 
@@ -75,10 +75,11 @@
                         <span class="text-[#cb6410] mr-2">Send Us A Message</span>
                         <div class="h-1 w-8 bg-[#cb6410]"></div>
                     </h3>
-                    <form>
+                    <form  action="https://api.web3forms.com/submit" method="POST">
+                        <input type="hidden" name="access_key" value="1e069ee8-164c-460f-8df0-3c0860459235">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                             <div>
-                                <label for="name" class="block text-gray-700 mb-2">Your Name</label>
+                                <label for="name" class="block text-gray-700 mb-2" >Your Name</label>
                                 <input type="text" id="name" name="name" 
                                     class="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#cb6410] focus:border-transparent transition"
                                     placeholder="John Doe">
@@ -102,6 +103,7 @@
                                 class="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#cb6410] focus:border-transparent transition"
                                 placeholder="Please describe what you need..."></textarea>
                         </div>
+                        <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
                         <button type="submit" 
                             class="w-full bg-[#cb6410] text-white py-3 px-6 rounded-md hover:bg-[#421606] transition-colors flex items-center justify-center group">
                             <span>Send Message</span>
