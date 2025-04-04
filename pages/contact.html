@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Jambo Survey</title>
+    <link rel="shortcut icon" href="../images/favicon.png" type="image/x-icon">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://kit.fontawesome.com/ef94ce9da8.js" crossorigin="anonymous"></script>
+    <script src="../index.js" defer></script>
+</head>
+
+<body>
+    <nav
+        class="flex flex-col md:flex-row justify-between items-center shadow-md bg-[#cb6410] p-4 md:px-8 lg:top-0 lg:sticky lg:z-50">
+        <a href="../index.html" class="w-full md:w-auto flex justify-center md:justify-start mb-4 md:mb-0">
+            <img src="../images/jambo-logo.png" alt="Jambo Survey Logo" class="h-15">
+        </a>
+        <button id="menuToggle" class="absolute top-4 right-4 text-white md:hidden">
+            <i class="fas fa-bars text-2xl"></i>
+        </button>
+        <div id="navLinks" class="hidden md:block w-full md:w-auto">
+            <ul class="flex flex-col md:flex-row items-center gap-4 md:gap-6 text-lg text-white">
+                <li><a href="../index.html" class="flex items-center hover:text-gray-200 py-2">Home</a></li>
+                <li><a href="./about.html" class="flex items-center hover:text-gray-200 py-2">About Us</a></li>
+                <li><a href="./service.html" class="flex items-center hover:text-gray-200 py-2">Services</a></li>
+                <li><a href="#" class="flex items-center hover:text-gray-200 py-2">Our Contacts</a></li>
+            </ul>
+        </div>
+        <span
+            class="w-full md:w-auto bg-[#421606] p-3 text-white rounded-3xl hover:bg-[#5a1e08] transition duration-300 mt-4 md:mt-0 text-center">
+            <a href="#" class="flex items-center justify-center">Request a Quote</a>
+        </span>
+    </nav>
+
+    <section class="relative h-[250px] sm:h-[300px] md:h-[350px] w-full flex items-center justify-center overflow-hidden">
+        <!-- Background Image with Overlay -->
+        <div class="absolute inset-0 z-0">
+            <img src="../images/about-3.jpeg" 
+                 alt="Office Background" 
+                 class="w-full h-full object-cover">
+            <!-- Dark Overlay for better text visibility -->
+            <div class="absolute inset-0 bg-black opacity-50"></div>
+        </div>
+        <!-- Text Content -->
+        <div class="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto text-white flex gap-6 items-center justify-center">
+            <div class="h-[3px] w-[50px] bg-blue-700"></div>
+            <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold mb-6">Contact Us</h1>
+            <div class="h-[3px] w-[50px] bg-blue-700"></div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-16 bg-gray-100">
+        <div class="container mx-auto max-w-6xl px-4">
+            <!-- Section Header -->
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-800 mb-4">Get In Touch</h2>
+                <div class="flex justify-center items-center gap-4 mb-6">
+                    <div class="h-1 w-12 bg-[#cb6410]"></div>
+                    <p class="text-xl text-gray-600">We're Here To Help</p>
+                    <div class="h-1 w-12 bg-[#cb6410]"></div>
+                </div>
+                <p class="text-gray-600 max-w-2xl mx-auto">
+                    Have questions about our services or need a quote? Contact us today and our team of experts will be happy to assist you.
+                </p>
+            </div>
+
+            <!-- Contact Content -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <!-- Contact Form -->
+                <div class="bg-white rounded-lg shadow-lg p-8" data-aos="fade-right" data-aos-delay="100">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                        <span class="text-[#cb6410] mr-2">Send Us A Message</span>
+                        <div class="h-1 w-8 bg-[#cb6410]"></div>
+                    </h3>
+                    <form>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                            <div>
+                                <label for="name" class="block text-gray-700 mb-2">Your Name</label>
+                                <input type="text" id="name" name="name" 
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#cb6410] focus:border-transparent transition"
+                                    placeholder="John Doe">
+                            </div>
+                            <div>
+                                <label for="email" class="block text-gray-700 mb-2">Your Email</label>
+                                <input type="email" id="email" name="email" 
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#cb6410] focus:border-transparent transition"
+                                    placeholder="john@example.com">
+                            </div>
+                        </div>
+                        <div class="mb-6">
+                            <label for="subject" class="block text-gray-700 mb-2">Subject</label>
+                            <input type="text" id="subject" name="subject" 
+                                class="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#cb6410] focus:border-transparent transition"
+                                placeholder="How can we help you?">
+                        </div>
+                        <div class="mb-6">
+                            <label for="message" class="block text-gray-700 mb-2">Your Message</label>
+                            <textarea id="message" name="message" rows="5" 
+                                class="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#cb6410] focus:border-transparent transition"
+                                placeholder="Please describe what you need..."></textarea>
+                        </div>
+                        <button type="submit" 
+                            class="w-full bg-[#cb6410] text-white py-3 px-6 rounded-md hover:bg-[#421606] transition-colors flex items-center justify-center group">
+                            <span>Send Message</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2 transform group-hover:translate-x-1 transition-transform" 
+                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                            </svg>
+                        </button>
+                    </form>
+                </div>
+                
+                <!-- Contact Info & Map -->
+                <div data-aos="fade-left" data-aos-delay="300">
+                    <!-- Contact Information Cards -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                        <!-- Address -->
+                        <div class="bg-white p-6 rounded-lg shadow-md group hover:shadow-lg transition-shadow">
+                            <div class="flex items-center mb-4">
+                                <div class="w-12 h-12 bg-[#cb6410]/10 rounded-full flex items-center justify-center mr-4 group-hover:bg-[#cb6410]/20 transition-colors">
+                                    <i class="fas fa-map-marker-alt text-[#cb6410] text-xl"></i>
+                                </div>
+                                <h4 class="text-lg font-semibold text-gray-800">Our Location</h4>
+                            </div>
+                            <p class="text-gray-600">Kiambu, Kenya</p>
+                        </div>
+                        
+                        <!-- Phone -->
+                        <div class="bg-white p-6 rounded-lg shadow-md group hover:shadow-lg transition-shadow">
+                            <div class="flex items-center mb-4">
+                                <div class="w-12 h-12 bg-[#cb6410]/10 rounded-full flex items-center justify-center mr-4 group-hover:bg-[#cb6410]/20 transition-colors">
+                                    <i class="fas fa-phone-alt text-[#cb6410] text-xl"></i>
+                                </div>
+                                <h4 class="text-lg font-semibold text-gray-800">Phone Number</h4>
+                            </div>
+                            <p class="text-gray-600">+254 797 297 593</p>
+                        </div>
+                        
+                        <!-- Email -->
+                        <div class="bg-white p-6 rounded-lg shadow-md group hover:shadow-lg transition-shadow">
+                            <div class="flex items-center mb-4">
+                                <div class="w-12 h-12 bg-[#cb6410]/10 rounded-full flex items-center justify-center mr-4 group-hover:bg-[#cb6410]/20 transition-colors">
+                                    <i class="fas fa-envelope text-[#cb6410] text-xl"></i>
+                                </div>
+                                <h4 class="text-lg font-semibold text-gray-800">Email Address</h4>
+                            </div>
+                            <p class="text-gray-600">info@jambosurv.daniels@gmail.com</p>
+                        </div>
+                        
+                        <!-- Hours -->
+                        <div class="bg-white p-6 rounded-lg shadow-md group hover:shadow-lg transition-shadow">
+                            <div class="flex items-center mb-4">
+                                <div class="w-12 h-12 bg-[#cb6410]/10 rounded-full flex items-center justify-center mr-4 group-hover:bg-[#cb6410]/20 transition-colors">
+                                    <i class="fas fa-clock text-[#cb6410] text-xl"></i>
+                                </div>
+                                <h4 class="text-lg font-semibold text-gray-800">Working Hours</h4>
+                            </div>
+                            <p class="text-gray-600">Mon-Fri: 8AM - 5PM</p>
+                        </div>
+                    </div>                      
+                    <!-- Map -->
+                    <div class="rounded-lg overflow-hidden shadow-lg h-64 lg:h-80">
+                        <!-- Replace with your actual iframe URL -->
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.9891215597054!2d36.822865711223024!3d-1.1681481355049026!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f3d4a2d4426b7%3A0x3faaa5bd3ced86e8!2sKiambu%20Town%20Main%20Stage!5e0!3m2!1sen!2ske!4v1743773250795!5m2!1sen!2ske" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-gray-800 text-white pt-16 pb-8">
+        <div class="container mx-auto max-w-6xl px-4">
+            <!-- Footer Main Content -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+
+                <!-- Company Info -->
+                <div class="space-y-4">
+                    <h3 class="text-xl font-bold text-[#cb6410] mb-4">Jambo Survey</h3>
+                    <p class="text-gray-300">Professional land surveying and geospatial services for all your needs.</p>
+                    <div class="flex space-x-4 mt-6">
+                        <a href="#" class="text-gray-300 hover:text-[#cb6410] transition-colors">
+                            <i class="fab fa-facebook-f text-lg"></i>
+                        </a>
+                        <a href="#" class="text-gray-300 hover:text-[#cb6410] transition-colors">
+                            <i class="fab fa-twitter text-lg"></i>
+                        </a>
+                        <a href="#" class="text-gray-300 hover:text-[#cb6410] transition-colors">
+                            <i class="fab fa-linkedin-in text-lg"></i>
+                        </a>
+                        <a href="#" class="text-gray-300 hover:text-[#cb6410] transition-colors">
+                            <i class="fab fa-instagram text-lg"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h3 class="text-xl font-bold text-[#cb6410] mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="../index.html" class="text-gray-300 hover:text-white transition-colors">Home</a></li>
+                        <li><a href="./about.html" class="text-gray-300 hover:text-white transition-colors">About Us</a></li>
+                        <li><a href="./services.html" class="text-gray-300 hover:text-white transition-colors">Services</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors">Projects</a></li>
+                        <li><a href="./contact.html" class="text-gray-300 hover:text-white transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+
+                <!-- Services -->
+                <div>
+                    <h3 class="text-xl font-bold text-[#cb6410] mb-4">Our Services</h3>
+                    <ul class="space-y-2">
+                        <li><a href="./services.html" class="text-gray-300 hover:text-white transition-colors">Land Surveying</a></li>
+                        <li><a href="./services.html" class="text-gray-300 hover:text-white transition-colors">GIS Mapping</a></li>
+                        <li><a href="./services.html" class="text-gray-300 hover:text-white transition-colors">Topographic Surveying</a></li>
+                        <li><a href="./services.html" class="text-gray-300 hover:text-white transition-colors">Engineering Survey</a></li>
+                        <li><a href="./services.html" class="text-gray-300 hover:text-white transition-colors">Consultations</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact Info -->
+                <div>
+                    <h3 class="text-xl font-bold text-[#cb6410] mb-4">Contact Us</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt mt-1 mr-3 text-[#cb6410]"></i>
+                            <span>Kiambu, Kenya</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-phone-alt mt-1 mr-3 text-[#cb6410]"></i>
+                            <span>+254 797 297 593</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-envelope mt-1 mr-3 text-[#cb6410]"></i>
+                            <span>info@jambosurv.daniels@gmail.com</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-clock mt-1 mr-3 text-[#cb6410]"></i>
+                            <span>Mon-Fri: 8AM - 5PM</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Copyright -->
+        <div class="border-t border-gray-700 pt-8 text-center text-gray-400">
+            <p>© 2025 Jambo Survey. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Animation JS Library (AOS) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+        // Initialize AOS animation library
+        document.addEventListener('DOMContentLoaded', function() {
+            AOS.init({
+                duration: 800,
+                easing: 'ease-in-out',
+                once: true,
+                offset: 100
+            });
+
+            // Mobile menu toggle functionality
+            const menuToggle = document.getElementById('menuToggle');
+            const navLinks = document.getElementById('navLinks');
+            
+            if(menuToggle && navLinks) {
+                menuToggle.addEventListener('click', function() {
+                    navLinks.classList.toggle('hidden');
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>
