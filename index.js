@@ -73,3 +73,105 @@ document.addEventListener('DOMContentLoaded', function() {
       slideInterval = setInterval(nextSlide, 5000);
     });
   });
+
+
+
+  // Add JavaScript to initialize animations and interactions for services section
+
+document.addEventListener('DOMContentLoaded', function() {
+  // Add scroll observer for entrance animations (fallback if AOS doesn't load)
+  const serviceItems = document.querySelectorAll('.service-item');
+  
+  if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                  entry.target.classList.add('visible');
+                  observer.unobserve(entry.target);
+              }
+          });
+      }, {
+          threshold: 0.2
+      });
+
+      serviceItems.forEach(item => {
+          observer.observe(item);
+          // Add default class for non-AOS fallback
+          item.classList.add('opacity-0');
+      });
+  }
+
+  // Add hover effects manually for better performance
+  serviceItems.forEach(item => {
+      item.addEventListener('mouseenter', function() {
+          this.classList.add('active');
+      });
+      
+      item.addEventListener('mouseleave', function() {
+          this.classList.remove('active');
+      });
+  });
+
+  // Add smooth scrolling for service section links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+          e.preventDefault();
+          const targetId = this.getAttribute('href');
+          
+          if (targetId === '#') return;
+          
+          const target = document.querySelector(targetId);
+          if (target) {
+              window.scrollTo({
+                  top: target.offsetTop - 100,
+                  behavior: 'smooth'
+              });
+          }
+      });
+  });
+
+  // Add mobile menu toggle functionality
+  const menuToggle = document.getElementById('menuToggle');
+  const navLinks = document.getElementById('navLinks');
+  
+  if (menuToggle && navLinks) {
+      menuToggle.addEventListener('click', function() {
+          navLinks.classList.toggle('hidden');
+          const icon = menuToggle.querySelector('i');
+          if (icon) {
+              icon.classList.toggle('fa-bars');
+              icon.classList.toggle('fa-times');
+          }
+      });
+  }
+});
+
+// Additional CSS styles added via JavaScript for better animations
+const style = document.createElement('style');
+style.textContent = `
+  .service-item {
+      transition: all 0.5s ease;
+  }
+  
+  .service-item:not(.visible) {
+      opacity: 0;
+      transform: translateY(30px);
+  }
+  
+  .service-item.visible {
+      opacity: 1;
+      transform: translateY(0);
+  }
+  
+  .service-item.active .service-content {
+      transform: translateY(-8px);
+  }
+  
+  @media (max-width: 768px) {
+      .service-item [data-aos] {
+          opacity: 1 !important;
+          transform: none !important;
+      }
+  }
+`;
+document.head.appendChild(style);
