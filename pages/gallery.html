@@ -4,8 +4,476 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gallery | Jambo Surveys and Engineering LTD</title>
+    <link rel="shortcut icon" href="../images/favicon.png" type="image/x-icon">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://kit.fontawesome.com/ef94ce9da8.js" crossorigin="anonymous"></script>
+    <script src="../index.js" defer></script>
+    <style>
+        .gallery-item {
+            transition: all 0.3s ease;
+        }
+        .gallery-item:hover {
+            transform: scale(1.02);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.85);
+            overflow: auto;
+            transition: opacity 0.3s ease;
+        }
+        .lightbox.active {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .lightbox-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+        }
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: white;
+            font-size: 30px;
+            cursor: pointer;
+            z-index: 1001;
+        }
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            color: white;
+            font-size: 30px;
+            cursor: pointer;
+            z-index: 1001;
+            background-color: rgba(0, 0, 0, 0.5);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .lightbox-prev {
+            left: 20px;
+        }
+        .lightbox-next {
+            right: 20px;
+        }
+        .filter-active {
+            background-color: #cb6410;
+            color: white;
+        }
+    </style>
 </head>
 <body>
+    <nav
+    class="flex flex-col md:flex-row justify-between items-center shadow-md bg-[#cb6410] p-4 md:px-8 lg:top-0 lg:sticky lg:z-50">
+    <a href="../index.html" class="w-full md:w-auto flex items-center gap-5 justify-center md:justify-start mb-4 md:mb-0">
+        <img src="../images/log0-1.jpeg" alt="Jambo Surveys and Engineering LTD Logo" class=" rounded-full h-15">
+        <h1 class="text-2xl">Jambo Surveys & Engineering LTD</h1>
+    </a>
+    <button id="menuToggle" class="absolute top-4 right-4 text-white md:hidden">
+        <i class="fas fa-bars text-2xl"></i>
+    </button>
+    <div id="navLinks" class="hidden md:block w-full md:w-auto">
+        <ul class="flex flex-col md:flex-row items-center gap-4 md:gap-6 text-lg text-white">
+            <li><a href="../index.html" class="flex items-center hover:text-gray-200 py-2"></i>Home</a></li>
+            <li><a href="./about.html" class="flex items-center hover:text-gray-200 py-2">About Us</a></li>
+            <li><a href="./service.html" class="flex items-center hover:text-gray-200 py-2">Services</a></li>
+            <li><a href="./contact.html" class="flex items-center hover:text-gray-200 py-2">Our Contacts</a></li>
+            <li><a href="./gallery.html" class="flex items-center hover:text-gray-200 py-2 text-white bg-[#421606] px-3 rounded-md">Gallery</a></li>
+        </ul>
+    </div>
+    <span
+        class="w-full md:w-auto bg-[#421606] p-3 text-white rounded-3xl hover:bg-[#5a1e08] transition duration-300 mt-4 md:mt-0 text-center">
+        <a href="./contact.html" class="flex items-center justify-center">Request a Quote</a>
+    </span>
+    </nav>
+
+    <!-- Gallery Header -->
+    <div class="bg-gradient-to-r from-gray-800 to-[#421606] text-white py-16">
+        <div class="container mx-auto px-4 max-w-6xl">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">Our Project Gallery</h1>
+            <p class="text-xl max-w-2xl">Explore our comprehensive collection of survey and engineering projects showcasing our expertise and commitment to excellence.</p>
+        </div>
+    </div>
+
+    <!-- Gallery Filter -->
+    <div class="container mx-auto px-4 py-8 max-w-6xl">
+        <div class="flex flex-wrap justify-center gap-3 mb-8">
+            <button class="filter-btn filter-active px-4 py-2 rounded-md text-sm md:text-base border border-[#cb6410] hover:bg-[#cb6410] hover:text-white transition-all" data-filter="all">All Projects</button>
+            <button class="filter-btn px-4 py-2 rounded-md text-sm md:text-base border border-[#cb6410] hover:bg-[#cb6410] hover:text-white transition-all" data-filter="land">Land Surveying</button>
+            <button class="filter-btn px-4 py-2 rounded-md text-sm md:text-base border border-[#cb6410] hover:bg-[#cb6410] hover:text-white transition-all" data-filter="topographic">Topographic</button>
+            <button class="filter-btn px-4 py-2 rounded-md text-sm md:text-base border border-[#cb6410] hover:bg-[#cb6410] hover:text-white transition-all" data-filter="engineering">Engineering</button>
+            <button class="filter-btn px-4 py-2 rounded-md text-sm md:text-base border border-[#cb6410] hover:bg-[#cb6410] hover:text-white transition-all" data-filter="gis">GIS Mapping</button>
+        </div>
+
+        <!-- Gallery Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
+            <!-- Gallery items (Using placeholder images, replace with actual project images) -->
+            <div class="gallery-item cursor-pointer rounded-lg overflow-hidden relative shadow-md group" data-category="land">
+                <img src="../images/about-1.jpeg" alt="Land Survey Project" class="w-full h-64 object-cover">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-4">
+                    <h3 class="text-white font-bold text-lg">Land Survey Project</h3>
+                    <p class="text-gray-200 text-sm">Boundary survey for residential development</p>
+                </div>
+            </div>
+            
+            <div class="gallery-item cursor-pointer rounded-lg overflow-hidden relative shadow-md group" data-category="topographic">
+                <img src="../images/about-2.jpeg" alt="Topographic Survey" class="w-full h-64 object-cover">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-4">
+                    <h3 class="text-white font-bold text-lg">Topographic Survey</h3>
+                    <p class="text-gray-200 text-sm">Elevation mapping for infrastructure project</p>
+                </div>
+            </div>
+            
+            <div class="gallery-item cursor-pointer rounded-lg overflow-hidden relative shadow-md group" data-category="engineering">
+                <img src="../images/about-3.jpeg" alt="Engineering Survey" class="w-full h-64 object-cover">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-4">
+                    <h3 class="text-white font-bold text-lg">Engineering Survey</h3>
+                    <p class="text-gray-200 text-sm">Construction layout for commercial building</p>
+                </div>
+            </div>
+            
+            <div class="gallery-item cursor-pointer rounded-lg overflow-hidden relative shadow-md group" data-category="gis">
+                <img src="../images/about-4.jpeg" alt="GIS Mapping" class="w-full h-64 object-cover">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-4">
+                    <h3 class="text-white font-bold text-lg">GIS Mapping</h3>
+                    <p class="text-gray-200 text-sm">Spatial analysis for urban planning</p>
+                </div>
+            </div>
+            
+            <div class="gallery-item cursor-pointer rounded-lg overflow-hidden relative shadow-md group" data-category="land">
+                <img src="../images/about-5.jpeg" alt="Land Survey Project" class="w-full h-64 object-cover">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-4">
+                    <h3 class="text-white font-bold text-lg">Land Survey Project</h3>
+                    <p class="text-gray-200 text-sm">Property subdivision in rural area</p>
+                </div>
+            </div>
+            
+            <div class="gallery-item cursor-pointer rounded-lg overflow-hidden relative shadow-md group" data-category="topographic">
+                <img src="../images/about-6.jpeg" alt="Topographic Survey" class="w-full h-64 object-cover rotate-90">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-4">
+                    <h3 class="text-white font-bold text-lg">Topographic Survey</h3>
+                    <p class="text-gray-200 text-sm">Contour mapping for hillside development</p>
+                </div>
+            </div>
+            
+            <div class="gallery-item cursor-pointer rounded-lg overflow-hidden relative shadow-md group" data-category="engineering">
+                <img src="../images/about-7.jpeg" alt="Engineering Survey" class="w-full h-64 object-cover">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-4">
+                    <h3 class="text-white font-bold text-lg">Engineering Survey</h3>
+                    <p class="text-gray-200 text-sm">Road alignment for highway expansion</p>
+                </div>
+            </div>
+            
+            <div class="gallery-item cursor-pointer rounded-lg overflow-hidden relative shadow-md group" data-category="gis">
+                <img src="../images/service-1.jpeg" alt="GIS Mapping" class="w-full h-64 object-cover">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-4">
+                    <h3 class="text-white font-bold text-lg">GIS Mapping</h3>
+                    <p class="text-gray-200 text-sm">Land use analysis for municipal planning</p>
+                </div>
+            </div>
+            
+            <div class="gallery-item cursor-pointer rounded-lg overflow-hidden relative shadow-md group" data-category="land">
+                <img src="../images/services-3.jpeg" alt="Land Survey Project" class="w-full h-64 object-cover">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-4">
+                    <h3 class="text-white font-bold text-lg">Land Survey Project</h3>
+                    <p class="text-gray-200 text-sm">Title survey for legal documentation</p>
+                </div>
+            </div>
+            
+            <div class="gallery-item cursor-pointer rounded-lg overflow-hidden relative shadow-md group" data-category="topographic">
+                <img src="../images/service-2.jpeg" alt="Topographic Survey" class="w-full h-64 object-cover">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-4">
+                    <h3 class="text-white font-bold text-lg">Topographic Survey</h3>
+                    <p class="text-gray-200 text-sm">Drainage study for flood prevention</p>
+                </div>
+            </div>
+            
+            <div class="gallery-item cursor-pointer rounded-lg overflow-hidden relative shadow-md group" data-category="engineering">
+                <img src="../images/service-7.jpeg" alt="Engineering Survey" class="w-full h-64 object-cover">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-4">
+                    <h3 class="text-white font-bold text-lg">Engineering Survey</h3>
+                    <p class="text-gray-200 text-sm">Bridge construction site preparation</p>
+                </div>
+            </div>
+            
+            <div class="gallery-item cursor-pointer rounded-lg overflow-hidden relative shadow-md group" data-category="gis">
+                <img src="../images/service-8.jpeg" alt="GIS Mapping" class="w-full h-64 object-cover">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-4">
+                    <h3 class="text-white font-bold text-lg">GIS Mapping</h3>
+                    <p class="text-gray-200 text-sm">Environmental impact assessment</p>
+                </div>
+            </div>
+            
+            <div class="gallery-item cursor-pointer rounded-lg overflow-hidden relative shadow-md group" data-category="land">
+                <img src="../images/service.jpeg" alt="Land Survey Project" class="w-full h-64 object-cover">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-4">
+                    <h3 class="text-white font-bold text-lg">Land Survey Project</h3>
+                    <p class="text-gray-200 text-sm">Easement survey for utility installation</p>
+                </div>
+            </div>
+            
+            <div class="gallery-item cursor-pointer rounded-lg overflow-hidden relative shadow-md group" data-category="topographic">
+                <img src="../images/service-4.jpeg" alt="Topographic Survey" class="w-full h-64 object-cover rotate-90">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-4">
+                    <h3 class="text-white font-bold text-lg">Topographic Survey</h3>
+                    <p class="text-gray-200 text-sm">3D terrain modeling for resort development</p>
+                </div>
+            </div>
+            
+            <div class="gallery-item cursor-pointer rounded-lg overflow-hidden relative shadow-md group" data-category="engineering">
+                <img src="../images/service-5.jpeg" alt="Engineering Survey" class="w-full h-64 object-cover">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-4">
+                </div>
+            </div>
+            
+            <div class="gallery-item cursor-pointer rounded-lg overflow-hidden relative shadow-md group" data-category="gis">
+                <img src="../images/WhatsApp Image 2025-04-01 at 19.09.11.jpeg" alt="GIS Mapping" class="w-full h-64 object-cover">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end p-4">
+                </div>
+            </div>
+            
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Call to Action -->
+    <div class="bg-[#421606] text-white py-16 my-12">
+        <div class="container mx-auto px-4 max-w-6xl text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4">Ready to Start Your Project?</h2>
+            <p class="text-lg mb-8 max-w-2xl mx-auto">Contact us today to discuss your surveying and engineering needs. Our team of experts is ready to assist you.</p>
+            <a href="./contact.html" class="bg-[#cb6410] text-white px-8 py-3 rounded-3xl text-lg font-medium hover:bg-[#a54e0d] transition duration-300">Request a Quote</a>
+        </div>
+    </div>
+
+    <!-- Lightbox -->
+    <div id="lightbox" class="lightbox">
+        <span class="lightbox-close"><i class="fas fa-times"></i></span>
+        <span class="lightbox-nav lightbox-prev"><i class="fas fa-chevron-left"></i></span>
+        <div class="lightbox-content">
+            <img id="lightbox-image" src="" alt="Project Image" class="max-w-full max-h-full">
+        </div>
+        <span class="lightbox-nav lightbox-next"><i class="fas fa-chevron-right"></i></span>
+    </div>
+
+    <footer class="bg-gray-800 text-white pt-16 pb-8">
+        <div class="container mx-auto max-w-6xl px-4">
+            <!-- Footer Main Content -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+
+                <!-- Company Info -->
+                <div class="space-y-4">
+                    <h3 class="text-xl font-bold text-[#cb6410] mb-4">Jambo Surveys and Engineering LTD</h3>
+                    <p class="text-gray-300">Professional land surveying and geospatial services for all your needs.</p>
+                    <div class="flex space-x-4 mt-6">
+                        <a href="#" class="text-gray-300 hover:text-[#cb6410] transition-colors">
+                            <i class="fab fa-facebook-f text-lg"></i>
+                        </a>
+                        <a href="#" class="text-gray-300 hover:text-[#cb6410] transition-colors">
+                            <i class="fab fa-twitter text-lg"></i>
+                        </a>
+                        <a href="#" class="text-gray-300 hover:text-[#cb6410] transition-colors">
+                            <i class="fab fa-linkedin-in text-lg"></i>
+                        </a>
+                        <a href="#" class="text-gray-300 hover:text-[#cb6410] transition-colors">
+                            <i class="fab fa-instagram text-lg"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h3 class="text-xl font-bold text-[#cb6410] mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="../index.html" class="text-gray-300 hover:text-white transition-colors">Home</a>
+                        </li>
+                        <li><a href="./about.html" class="text-gray-300 hover:text-white transition-colors">About
+                                Us</a></li>
+                        <li><a href="./service.html" class="text-gray-300 hover:text-white transition-colors">Services</a></li>
+                        <li><a href="./gallery.html" class="text-gray-300 hover:text-white transition-colors">Gallery</a></li>
+                        <li><a href="./contact.html" class="text-gray-300 hover:text-white transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+
+                <!-- Services -->
+                <div>
+                    <h3 class="text-xl font-bold text-[#cb6410] mb-4">Our Services</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors">Land Surveying</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors">GIS Mapping</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors">Topographic
+                                Surveying</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors">Engineering Survey</a>
+                        </li>
+                        <li><a href="#" class="text-gray-300 hover:text-white transition-colors">Consultations</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact Info -->
+                <div>
+                    <h3 class="text-xl font-bold text-[#cb6410] mb-4">Contact Us</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt mt-1 mr-3 text-[#cb6410]"></i>
+                            <span>Kiambu, Kenya</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-phone-alt mt-1 mr-3 text-[#cb6410]"></i>
+                            <span>+254 797 297 593</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-envelope mt-1 mr-3 text-[#cb6410]"></i>
+                            <span>jambosurv.daniels@gmail.com</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-clock mt-1 mr-3 text-[#cb6410]"></i>
+                            <span>Mon-Fri: 8AM - 5PM</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Copyright -->
+        <div class="border-t border-gray-700 pt-8 text-center text-gray-400">
+            <p>© 2025 Jambo Surveys and Engineering LTDs and Engineering LTD. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+// Mobile Menu Toggle
+document.addEventListener('DOMContentLoaded', function() {
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
     
+    menuToggle.addEventListener('click', function() {
+        navLinks.classList.toggle('hidden');
+    });
+    
+    // Gallery Filtering
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const galleryItems = document.querySelectorAll('.gallery-item');
+    
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            // Update active button
+            filterBtns.forEach(b => b.classList.remove('filter-active'));
+            btn.classList.add('filter-active');
+            
+            const filter = btn.getAttribute('data-filter');
+            
+            galleryItems.forEach(item => {
+                if (filter === 'all' || item.getAttribute('data-category') === filter) {
+                    item.style.display = 'block';
+                    setTimeout(() => {
+                        item.style.opacity = '1';
+                        item.style.transform = 'scale(1)';
+                    }, 10);
+                } else {
+                    item.style.opacity = '0';
+                    item.style.transform = 'scale(0.8)';
+                    setTimeout(() => {
+                        item.style.display = 'none';
+                    }, 300);
+                }
+            });
+        });
+    });
+    
+    // Lightbox functionality
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImage = document.getElementById('lightbox-image');
+    const lightboxClose = document.querySelector('.lightbox-close');
+    const lightboxPrev = document.querySelector('.lightbox-prev');
+    const lightboxNext = document.querySelector('.lightbox-next');
+    let currentImageIndex = 0;
+    const visibleImages = [];
+    
+    function updateVisibleImages() {
+        visibleImages.length = 0;
+        galleryItems.forEach((item, index) => {
+            if (window.getComputedStyle(item).display !== 'none') {
+                visibleImages.push({
+                    index: index,
+                    src: item.querySelector('img').src,
+                    alt: item.querySelector('img').alt
+                });
+            }
+        });
+    }
+    
+    function openLightbox(index) {
+        updateVisibleImages();
+        currentImageIndex = visibleImages.findIndex(img => img.index === index);
+        lightboxImage.src = visibleImages[currentImageIndex].src;
+        lightboxImage.alt = visibleImages[currentImageIndex].alt;
+        lightbox.classList.add('active');
+        document.body.style.overflow = 'hidden'; // Prevent scrolling when lightbox is open
+    }
+    
+    function closeLightbox() {
+        lightbox.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+    
+    function showPrevImage() {
+        currentImageIndex = (currentImageIndex - 1 + visibleImages.length) % visibleImages.length;
+        lightboxImage.src = visibleImages[currentImageIndex].src;
+        lightboxImage.alt = visibleImages[currentImageIndex].alt;
+    }
+    
+    function showNextImage() {
+        currentImageIndex = (currentImageIndex + 1) % visibleImages.length;
+        lightboxImage.src = visibleImages[currentImageIndex].src;
+        lightboxImage.alt = visibleImages[currentImageIndex].alt;
+    }
+    
+    // Set up gallery item click events
+    galleryItems.forEach((item, index) => {
+        item.addEventListener('click', () => {
+            openLightbox(index);
+        });
+    });
+    
+    // Lightbox control events
+    lightboxClose.addEventListener('click', closeLightbox);
+    lightboxPrev.addEventListener('click', showPrevImage);
+    lightboxNext.addEventListener('click', showNextImage);
+    
+    // Close lightbox on background click
+    lightbox.addEventListener('click', function(e) {
+        if (e.target === lightbox) {
+            closeLightbox();
+        }
+    });
+    
+    // Keyboard navigation for lightbox
+    document.addEventListener('keydown', function(e) {
+        if (!lightbox.classList.contains('active')) return;
+        
+        if (e.key === 'Escape') {
+            closeLightbox();
+        } else if (e.key === 'ArrowLeft') {
+            showPrevImage();
+        } else if (e.key === 'ArrowRight') {
+            showNextImage();
+        }
+    });
+});
+    </script>
 </body>
+
 </html>
