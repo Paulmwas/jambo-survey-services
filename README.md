@@ -16,7 +16,7 @@ This project is a modern React-based web application for a professional land sur
 ## Directory Structure
 
 ```
-paulmwas-jambo-survey-services/
+jambo-survey-services/
 ├── README.md
 ├── index.html
 ├── index.js
@@ -88,5 +88,6 @@ This project is licensed under the MIT License.
 **Jambo Surveys and Engineering LTD**  
 Kiambu, Kenya  
 Contact: jambosurv.daniels@gmail.com | +254 797 297 593
+
 
 
