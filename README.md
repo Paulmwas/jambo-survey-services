@@ -39,7 +39,7 @@ jambo-survey-services/
 1. **Clone the repository:**
    ```bash
    git clone https://github.com/Paulmwas/jambo-survey-services.git
-   cd paulmwas-jambo-survey-services
+   cd jambo-survey-services
    ```
 
 2. **Install dependencies:**
@@ -88,6 +88,7 @@ This project is licensed under the MIT License.
 **Jambo Surveys and Engineering LTD**  
 Kiambu, Kenya  
 Contact: jambosurv.daniels@gmail.com | +254 797 297 593
+
 
 
 
